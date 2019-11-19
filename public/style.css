@@ -1,0 +1,13 @@
+.caart {
+    width: 150px;
+    height: 50px - 13px;
+    background: #E74C3C;
+    color: #fff;
+    text-align: center;
+    font-family: "Helvetica Neue";
+    font-size: 21px;
+    padding-top: 13px;
+    border-bottom: 3px solid #d83d2d;
+    border-radius: 4px;
+    margin-left: 13px;
+}
