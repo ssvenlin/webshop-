@@ -9,6 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
+      
 
 @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
 
@@ -304,7 +305,7 @@ footer a {
                 cart.push({id:id, amount: amount})
                 console.log(cart)
             }
-            
+            sessionStorage.setItem("cart", JSON.stringify(cart));
             $("#cartamount").html(cart.length)
         }
         function productInCart(id){
@@ -316,7 +317,10 @@ footer a {
 
         function getProducts(){
             let result = [{id: 1, make: "Mersu", model:"Bnez", price: 56.78},{id: 2, make: "Subaru", model:"Impreza", price: 6.78},{id: 3, make:"BMW", model:"1337", price: 99.78}]
-            return result;//Tyst Patrik
+            //spara i sessionStorage
+            sessionStorage.setItem("products", JSON.stringify(result));
+            return result;
+
         }            
         function product(id, title, text, image="https://dummyimage.com/286x180/000/fff"){
             let product = `<div data="${id}" style="float:left;" class="card product" style="width: 18rem;">
@@ -344,10 +348,10 @@ footer a {
                 });
         });*/
 
-        var cart = $('.product'),
-    cartCountCont = cart.find('#cartAmount'),
-    cartCount = parseInt(cartCountCont.text(), 10),
-    addToCart = $('.addtocartbutton');
+    //     var cart = $('.product'),
+    // cartCountCont = cart.find('#cartAmount'),
+    // cartCount = parseInt(cartCountCont.text(), 10),
+    // addToCart = $('.addtocartbutton');
 
 
     </script>
