@@ -6,7 +6,231 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Till kassan</title>
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style>
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+/*
+body {
+  font: 14px/22px "Lato", Arial, sans-serif;
+  background: #6394F8;
+}
+*/
+.lighter-text {
+  color: #ABB0BE;
+}
+
+.main-color-text {
+  color: main-color;
+}
+/*
+nav {
+  padding: 20px 0 40px 0;
+  background: #F8F8F8;
+  font-size: 16px;
+  
+  .navbar-left {
+    float: left;
+  }
+  
+  .navbar-right {
+    float: right;
+  }
+  ul {
+    
+    li {
+      display: inline;
+      padding-left: 20px;
+      a {
+        color: #777777;
+        text-decoration: none;
+        
+        &:hover {
+          color: black;
+        }
+      }
+    }
+  }
+}
+
+.container {
+  margin: auto;
+  width: 80%;
+}
+
+.badge {
+    background-color: #6394F8;
+    border-radius: 10px;
+    color: white;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1;
+    padding: 3px 7px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.shopping-cart {
+  margin: 20px 0;
+  float: right;
+  background: white;
+  width: 320px;
+  position: relative;
+  border-radius: 3px;
+  padding: 20px;
+  
+  
+  .shopping-cart-header {
+    border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 15px;
+    
+    .shopping-cart-total {
+      float: right;
+    }
+  }
+  
+  .shopping-cart-items {
+    
+    padding-top: 20px;
+
+      li {
+        margin-bottom: 18px;
+      }
+
+    img {
+      float: left;
+      margin-right: 12px;
+    }
+    
+    .item-name {
+      display: block;
+      padding-top: 10px;
+      font-size: 16px;
+    }
+    
+    .item-price {
+      color: $main-color;
+      margin-right: 8px;
+    }
+    
+    .item-quantity {
+      color: $light-text;
+    }
+  }
+   
+}
+
+.shopping-cart:after {
+	bottom: 100%;
+	left: 89%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-bottom-color: white;
+	border-width: 8px;
+	margin-left: -8px;
+}
+
+.cart-icon {
+  color: #515783;
+  font-size: 24px;
+  margin-right: 7px;
+  float: left;
+}
+
+.button {
+  background: $main-color;
+  color:white;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  display: block;
+  border-radius: 3px;
+  font-size: 16px;
+  margin: 25px 0 15px 0;
+  
+  &:hover {
+    background: lighten($main-color, 3%);
+  }
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+        /*
+** Style Simple Ecommerce Theme for Bootstrap 4
+** Created by T-PHP https://t-php.fr/43-theme-ecommerce-bootstrap-4.html
+*/
+.bloc_left_price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 150%;
+}
+.category_block li:hover {
+    background-color: #007bff;
+}
+.category_block li:hover a {
+    color: #ffffff;
+}
+.category_block li a {
+    color: #343a40;
+}
+.add_to_cart_block .price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 200%;
+    margin-bottom: 0;
+}
+.add_to_cart_block .price_discounted {
+    color: #343a40;
+    text-align: center;
+    text-decoration: line-through;
+    font-size: 140%;
+}
+.product_rassurance {
+    padding: 10px;
+    margin-top: 15px;
+    background: #ffffff;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+}
+.product_rassurance .list-inline {
+    margin-bottom: 0;
+    text-transform: uppercase;
+    text-align: center;
+}
+.product_rassurance .list-inline li:hover {
+    color: #343a40;
+}
+.reviews_product .fa-star {
+    color: gold;
+}
+.pagination {
+    margin-top: 20px;
+}
+footer {
+    background: #343a40;
+    padding: 40px;
+}
+footer a {
+    color: #f8f9fa!important
+}
+
+
     body {
   font-family: Arial;
   font-size: 17px;
@@ -47,7 +271,7 @@
 }
 
 .container {
-  background-color: #f2f2f2;
+
   padding: 5px 20px 15px 20px;
   border: 1px solid lightgrey;
   border-radius: 3px;
@@ -111,8 +335,55 @@ span.price {
   }
 }
 </style>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <body>
-        <div class="row">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html">Svenlins webshop</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+            
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                        <ul class="navbar-nav m-auto">
+                            <li class="nav-item m-auto">
+                                <a class="nav-link" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="category.html">Categories</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="product.html">Product</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="contact.html">Cart <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html">Contact</a>
+                            </li>
+                        </ul>
+            
+                        <form class="form-inline my-2 my-lg-0">
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary btn-number">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <a class="btn btn-success btn-sm ml-3" id="cart" href="kassa.html">
+                                <i class="fa fa-shopping-cart"></i> Cart
+                                <span id="cartamount" class="badge badge-light"></span>
+                            </a>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <div id="tabell"></div>
+            <div id="summa"></div>
+
+            <div class="row">
                 <div class="col-75">
                   <div class="container">
                     <form action="/action_page.php">
@@ -125,57 +396,41 @@ span.price {
                           <label for="email"><i class="fa fa-envelope"></i> Email</label>
                           <input type="text" id="email" name="email" placeholder="john@example.com">
                           <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-                          <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+                          <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">  
                           <label for="city"><i class="fa fa-institution"></i> City</label>
                           <input type="text" id="city" name="city" placeholder="New York">
+                          <input type="submit" value="Continue to checkout" class="btn">
               
-                          <div class="row">
-                            <div class="col-50">
-                              <label for="state">State</label>
-                              <input type="text" id="state" name="state" placeholder="NY">
-                            </div>
-                          </div>
+                         
                         </div>
               
-                        <div class="col-50">
-                          <h3>Payment</h3>
-                          <label for="fname">Accepted Cards</label>
-                          <div class="icon-container">
-                            <i class="fa fa-cc-visa" style="color:navy;"></i>
-                            <i class="fa fa-cc-amex" style="color:blue;"></i>
-                            <i class="fa fa-cc-mastercard" style="color:red;"></i>
-                            <i class="fa fa-cc-discover" style="color:orange;"></i>
-                          </div>
-                          <label for="cname">Name on Card</label>
-                          <input type="text" id="cname" name="cardname" placeholder="John More Doe">
-                          <label for="ccnum">Credit card number</label>
-                          <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-                          <label for="expmonth">Month</label>
-                          <input type="text" id="expmonth" name="expmonth" placeholder="september">
-                          <div class="row">
-                            <div class="col-50">
-                              <label for="expyear">Year</label>
-                              <input type="text" id="expyear" name="expyear" placeholder="2018">
-                            </div>
-                            <div class="col-50">
-                              <label for="cvv">CVV</label>
-                              <input type="text" id="cvv" name="cvv" placeholder="352">
-                            </div>
-                          </div>
-                        </div>
-                        
-                      </div>
-                      <label>
-                        <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
-                      </label>
-                      <input type="submit" value="Continue to checkout" class="btn">
+                       
                     </form>
                   </div>
                 </div>
     
     <script>
+    
+        let products = JSON.parse(sessionStorage.getItem("products"));
         let cart = JSON.parse(sessionStorage.getItem("cart"));
         console.log(cart[0].amount);
+
+        function getProduct(id, products) {
+            return products.filter(word => word.id == id)
+            }
+           let tabell = "<table>";
+           let summa = 0;
+           for(let i = 0; i < cart.length; i++){
+               let prod = getProduct(cart[i].id, products);
+              tabell += `<tr><td>${prod.make} ${prod.model}</td><td> ${cart[i].amount}st</td><td>${prod.price}</td></tr>`
+              summa += prod.price * cart[i].amount;
+                //console.log("cart");  
+         }
+         tabell += "</table>"
+         $("#tabell").html(tabell);
+         $("#summa").html(summa);
+         
+     
     </script>
 </body>
 </html>
