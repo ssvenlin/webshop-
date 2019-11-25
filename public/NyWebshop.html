@@ -281,11 +281,13 @@ footer a {
                     </div>
                 </div>
             </nav>
+
             <div class="shopping-cart"><a onclick="filterByCategory('bil')">Bil</a>
                 <a onclick="filterByCategory('car')">car</a>
                 <a onclick="filterByCategory('truck')">truck</a>
                 <a onclick="filterByCategory('båt')">boat</a>
                 <a onclick="showProducts()">ShowAll</a>
+                <a onclick="filterByPrice(10, 200)">price</a>
             </div>
     <div id="products"></div>
     <script>
@@ -306,7 +308,7 @@ footer a {
         
         
     showProducts();
-    sessionStorage.setItem("products",JSON.stringify(result));
+    sessionStorage.setItem("products",JSON.stringify(getProducts()));
     });
    
     
@@ -364,6 +366,12 @@ footer a {
                         
             showProducts(getProducts().filter(word => word.category == cat));
         }
+
+        function filterByPrice(low, high){
+                        
+            showProducts(getProducts().filter(word => word.price >= low && word.price <= high));
+        }
+            
 
         function product(id, title, text, image="https://dummyimage.com/286x180/000/fff"){
             let product = `<div data="${id}" style="float:left;" class="card product" style="width: 18rem;">
