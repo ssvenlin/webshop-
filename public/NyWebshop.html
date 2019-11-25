@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
-        
+      
 
 @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
 
@@ -29,7 +29,7 @@ body {
 }
 
 .main-color-text {
-  color: #6394F8;
+  color: main-color;
 }
 /*
 nav {
@@ -235,6 +235,7 @@ footer a {
 
     </style>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 </head>
 <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -280,38 +281,52 @@ footer a {
                     </div>
                 </div>
             </nav>
-            <div class="shopping-cart">shopping cart</div>
+            <div class="shopping-cart"><a onclick="filterByCategory('bil')">Bil</a>
+                <a onclick="filterByCategory('car')">car</a>
+                <a onclick="filterByCategory('truck')">truck</a>
+                <a onclick="filterByCategory('båt')">boat</a>
+                <a onclick="showProducts()">ShowAll</a>
+            </div>
     <div id="products"></div>
     <script>
-       var cart = JSON.parse(sessionStorage.getItem("cart"))
-      $(document).ready(function(){
-       
-
+   /* function getCartProductAmount(){
+        var cart = JSON.parse(sessionStorage.getItem("cart"));
         console.log(cart)
-        if(cart.length){
-          $("#cartamount").html(cart.length)
+    }*/
+    var cart = JSON.parse(sessionStorage.getItem("cart"));
+    console.log(cart)
+    $( document ).ready(function() {
+       
+        if(cart!=null){
+            $("#cartamount").html(cart.length);
         }else{
-           cart = [];
+          cart=[];
+
         }
-        let result = getProducts();
-
+        
+        
+    showProducts();
+    sessionStorage.setItem("products",JSON.stringify(result));
+    });
+   
+    
+    console.log(cart);
+    function showProducts(products=getProducts()){
         let title="",text=""
-                    for(let i = 0 ; i < result.length ; i++){
-                        title = result[i].make;
-                        text = result[i].model;//"Den bästaste bilen"
-                        id =  result[i].id;
+        $("#products").html("");
+                    for(let i = 0 ; i < products.length ; i++){
+                        title = products[i].make;
+                        text = products[i].model;//"Den bästaste bilen"
+                        id =  products[i].id;
 
-                        $("#products").append(product(id,title,text))  
+                        $("#products").append(product(id,title,text)) 
+
                     }
-      })
-        
-        
-                    function getCartProductAmount(){
-                      return 4;
-                    }
+                    
+    }            
+       
         function addToCart( id, amount=1){
             console.log("Adding " + id + " :: " + amount)
-            console.log("korg" + cart)
             if(productInCart(id)){
                 //Update amount
                 cart[cart.findIndex(x => x.id === id)].amount++;
@@ -321,7 +336,7 @@ footer a {
                 cart.push({id:id, amount: amount})
                 console.log(cart)
             }
-            sessionStorage.setItem("cart", JSON.stringify(cart))
+            sessionStorage.setItem("cart",JSON.stringify(cart));
             $("#cartamount").html(cart.length)
         }
         function productInCart(id){
@@ -332,10 +347,24 @@ footer a {
         }
 
         function getProducts(){
-            let result = [{id: 1, make: "Mersu", model:"Bnez", price: 56.78},{id: 2, make: "Subaru", model:"Impreza", price: 6.78},{id: 3, make:"BMW", model:"1337", price: 99.78}]
-            sessionStorage.setItem("products",JSON.stringify(result))
+            let result = [
+                {id: 1, make: "Mersu", model:"Bnez", price: 56.78, category: "car"},
+                {id: 2, make: "Subaru", model:"Impreza", price: 6.78, category: "car"},
+                {id: 3, make:"BMW", model:"1337", price: 99.78, category: "bil"},
+                {id: 4, make:"Ford", model:"Focus", price: 102.2, category: "bil"},
+                {id: 5, make:"Monster", model:"Truck", price: 199.78, category: "truck"},
+                {id: 6, make:"Ram", model:"1500", price: 399.78, category: "truck"},
+                {id: 7, make:"Yamaha", model:"20hp", price: 109.78, category: "båt"},
+                {id: 7, make:"Yamaha", model:"mercury", price: 79.78, category: "båt"}
+                ]
             return result;//Tyst Patrik
         }            
+
+        function filterByCategory(cat){
+                        
+            showProducts(getProducts().filter(word => word.category == cat));
+        }
+
         function product(id, title, text, image="https://dummyimage.com/286x180/000/fff"){
             let product = `<div data="${id}" style="float:left;" class="card product" style="width: 18rem;">
                 <img class="card-img-top" src="${image}" alt="Card image cap">
@@ -350,6 +379,10 @@ footer a {
         function clickShoppingCart(){
             console.log("click sc")
         }
+
+        //sparar 
+
+        
          /* $(function() {
                 $.getJSON("http://www.optival.fi/products.json", function(result){
                     let title="",text=""
@@ -362,7 +395,8 @@ footer a {
                 });
         });*/
 
-        
+      
+
 
     </script>
 </body>
