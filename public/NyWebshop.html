@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
-      
+        
 
 @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
 
@@ -29,7 +29,7 @@ body {
 }
 
 .main-color-text {
-  color: main-color;
+  color: #6394F8;
 }
 /*
 nav {
@@ -232,13 +232,14 @@ footer a {
     color: #f8f9fa!important
 }
 
+
     </style>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
                 <div class="container">
-                    <a class="navbar-brand" href="index.html">Svenlins webshop</a>
+                    <a class="navbar-brand" href="index.html">Simple Ecommerce</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -282,7 +283,16 @@ footer a {
             <div class="shopping-cart">shopping cart</div>
     <div id="products"></div>
     <script>
-        var cart = [];
+       var cart = JSON.parse(sessionStorage.getItem("cart"))
+      $(document).ready(function(){
+       
+
+        console.log(cart)
+        if(cart.length){
+          $("#cartamount").html(cart.length)
+        }else{
+           cart = [];
+        }
         let result = getProducts();
 
         let title="",text=""
@@ -293,8 +303,15 @@ footer a {
 
                         $("#products").append(product(id,title,text))  
                     }
+      })
+        
+        
+                    function getCartProductAmount(){
+                      return 4;
+                    }
         function addToCart( id, amount=1){
             console.log("Adding " + id + " :: " + amount)
+            console.log("korg" + cart)
             if(productInCart(id)){
                 //Update amount
                 cart[cart.findIndex(x => x.id === id)].amount++;
@@ -304,7 +321,7 @@ footer a {
                 cart.push({id:id, amount: amount})
                 console.log(cart)
             }
-            sessionStorage.setItem("cart", JSON.stringify(cart));
+            sessionStorage.setItem("cart", JSON.stringify(cart))
             $("#cartamount").html(cart.length)
         }
         function productInCart(id){
@@ -316,10 +333,8 @@ footer a {
 
         function getProducts(){
             let result = [{id: 1, make: "Mersu", model:"Bnez", price: 56.78},{id: 2, make: "Subaru", model:"Impreza", price: 6.78},{id: 3, make:"BMW", model:"1337", price: 99.78}]
-            //spara i sessionStorage
-            sessionStorage.setItem("products", JSON.stringify(result));
-            return result;
-
+            sessionStorage.setItem("products",JSON.stringify(result))
+            return result;//Tyst Patrik
         }            
         function product(id, title, text, image="https://dummyimage.com/286x180/000/fff"){
             let product = `<div data="${id}" style="float:left;" class="card product" style="width: 18rem;">
@@ -347,11 +362,7 @@ footer a {
                 });
         });*/
 
-    //     var cart = $('.product'),
-    // cartCountCont = cart.find('#cartAmount'),
-    // cartCount = parseInt(cartCountCont.text(), 10),
-    // addToCart = $('.addtocartbutton');
-
+        
 
     </script>
 </body>

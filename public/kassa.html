@@ -173,6 +173,44 @@ nav {
 ** Style Simple Ecommerce Theme for Bootstrap 4
 ** Created by T-PHP https://t-php.fr/43-theme-ecommerce-bootstrap-4.html
 */
+
+/* table css */
+
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+/*slutar här*/
+
+
+
+/*centrerad*/
+.center {
+  margin: auto;
+  width: 60%;
+  border: 3px #B9B5B5;
+  padding: 10px;
+}
+
 .bloc_left_price {
     color: #c01508;
     text-align: center;
@@ -380,56 +418,41 @@ span.price {
                     </div>
                 </div>
             </nav>
-            <div id="tabell"></div>
-            <div id="summa"></div>
 
-            <div class="row">
-                <div class="col-75">
-                  <div class="container">
-                    <form action="/action_page.php">
-                    
-                      <div class="row">
-                        <div class="col-50">
-                          <h3>Billing Address</h3>
-                          <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-                          <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
-                          <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                          <input type="text" id="email" name="email" placeholder="john@example.com">
-                          <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-                          <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">  
-                          <label for="city"><i class="fa fa-institution"></i> City</label>
-                          <input type="text" id="city" name="city" placeholder="New York">
-                          <input type="submit" value="Continue to checkout" class="btn">
-              
-                         
-                        </div>
-              
-                       
-                    </form>
-                  </div>
-                </div>
-    
+            <body>
+                           
+            </body>
+            <div  class="center" id="tabell"></div>
+            <div class="center" id="summa" ></div>
+
     <script>
     
         let products = JSON.parse(sessionStorage.getItem("products"));
         let cart = JSON.parse(sessionStorage.getItem("cart"));
         console.log(cart[0].amount);
 
+        
+
         function getProduct(id, products) {
-            return products.filter(word => word.id == id)
-            }
-           let tabell = "<table>";
+            
+            return products.filter(word => word.id == id)[0]
+        }
+
+           let tabell = "<table id='customers'>";
            let summa = 0;
            for(let i = 0; i < cart.length; i++){
                let prod = getProduct(cart[i].id, products);
               tabell += `<tr><td>${prod.make} ${prod.model}</td><td> ${cart[i].amount}st</td><td>${prod.price}</td></tr>`
               summa += prod.price * cart[i].amount;
+              prod.price.toFixed();
                 //console.log("cart");  
          }
+         
          tabell += "</table>"
          $("#tabell").html(tabell);
          $("#summa").html(summa);
          
+     console.log("tabell" + tabell);
      
     </script>
 </body>
