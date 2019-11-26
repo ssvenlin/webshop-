@@ -314,14 +314,16 @@ footer a {
     
     console.log(cart);
     function showProducts(products=getProducts()){
-        let title="",text=""
+        let title="",text="",price=""
         $("#products").html("");
                     for(let i = 0 ; i < products.length ; i++){
+                        price =  products[i].price;
                         title = products[i].make;
                         text = products[i].model;//"Den bästaste bilen"
                         id =  products[i].id;
 
-                        $("#products").append(product(id,title,text)) 
+                        image="https://dummyimage.com/286x180/000/fff"
+                        $("#products").append(product(id,title,text, image,price)) 
 
                     }
                     
@@ -373,12 +375,14 @@ footer a {
         }
             
 
-        function product(id, title, text, image="https://dummyimage.com/286x180/000/fff"){
+        function product(id, title, text, image,price){
             let product = `<div data="${id}" style="float:left;" class="card product" style="width: 18rem;">
                 <img class="card-img-top" src="${image}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">${title}</h5>
                   <p class="card-text">${text}</p>
+                  <p class="card-text">${price}</p>
+
                   <a onclick="addToCart(${id},1)" class="btn btn-primary addtocartbutton">Lägg i varukorg</a>
                 </div>
               </div>`
