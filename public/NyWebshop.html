@@ -240,7 +240,7 @@ footer a {
 <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
                 <div class="container">
-                    <a class="navbar-brand" href="index.html">Simple Ecommerce</a>
+                    <a class="navbar-brand" href="index.html">Svenlins webshop</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -305,15 +305,18 @@ footer a {
           cart=[];
 
         }
+        getProducts()
         
-        
-    showProducts();
-    sessionStorage.setItem("products",JSON.stringify(getProducts()));
+    
+
     });
    
     
-    console.log(cart);
-    function showProducts(products=getProducts()){
+    //console.log(cart);
+    function showProducts(products=false){
+      if(products == false){
+        products = JSON.parse(sessionStorage.getItem("products"))
+      }
         let title="",text="",price=""
         $("#products").html("");
                     for(let i = 0 ; i < products.length ; i++){
@@ -351,27 +354,39 @@ footer a {
         }
 
         function getProducts(){
-            let result = [
-                {id: 1, make: "Mersu", model:"Bnez", price: 56.78, category: "car"},
-                {id: 2, make: "Subaru", model:"Impreza", price: 6.78, category: "car"},
-                {id: 3, make:"BMW", model:"1337", price: 99.78, category: "bil"},
-                {id: 4, make:"Ford", model:"Focus", price: 102.2, category: "bil"},
-                {id: 5, make:"Monster", model:"Truck", price: 199.78, category: "truck"},
-                {id: 6, make:"Ram", model:"1500", price: 399.78, category: "truck"},
-                {id: 7, make:"Yamaha", model:"20hp", price: 109.78, category: "båt"},
-                {id: 7, make:"Yamaha", model:"mercury", price: 79.78, category: "båt"}
-                ]
-            return result;//Tyst Patrik
+
+        
+          $.getJSON( "http://localhost:3000/getProducts", function( data ){
+          console.log(data);
+          showProducts(data);
+          sessionStorage.setItem("products",JSON.stringify(data));
+
+          })
+
+          
+
+            // let result = [
+            //     {id: 1, make: "Mersu", model:"Bnez", price: 56.78, category: "car"},
+            //     {id: 2, make: "Subaru", model:"Impreza", price: 6.78, category: "car"},
+            //     {id: 3, make:"BMW", model:"1337", price: 99.78, category: "bil"},
+            //     {id: 4, make:"Ford", model:"Focus", price: 102.2, category: "bil"},
+            //     {id: 5, make:"Monster", model:"Truck", price: 199.78, category: "truck"},
+            //     {id: 6, make:"Ram", model:"1500", price: 399.78, category: "truck"},
+            //     {id: 7, make:"Yamaha", model:"20hp", price: 109.78, category: "båt"},
+            //     {id: 7, make:"Yamaha", model:"mercury", price: 79.78, category: "båt"}
+            //     ]
+                //http://localhost:3000/getProducts
+          //  return result;//Tyst Patrik
         }            
 
         function filterByCategory(cat){
                         
-            showProducts(getProducts().filter(word => word.category == cat));
+            showProducts( JSON.parse(sessionStorage.getItem("products")).filter(word => word.category == cat));
         }
 
         function filterByPrice(low, high){
                         
-            showProducts(getProducts().filter(word => word.price >= low && word.price <= high));
+            showProducts(JSON.parse(sessionStorage.getItem("products")).filter(word => word.price >= low && word.price <= high));
         }
             
 
